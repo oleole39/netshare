@@ -10,7 +10,6 @@ jobs:
   release-app:
     name: Release app as ${{ matrix.build-type }} (${{ matrix.platform }}) on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    needs: pre-run
     defaults:
       run:
         working-directory: netshare
