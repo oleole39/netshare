@@ -24,9 +24,6 @@ jobs:
           - os: ubuntu-latest
             platform: linux
             build-type: debian
-          - os: ubuntu-latest
-            platform: linux
-            build-type: debian
           - os: macos-14
             platform: macos
             build-type: macos
