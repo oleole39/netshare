@@ -63,15 +63,13 @@ jobs:
           VERSION_LINE=$(grep '^version:' pubspec.yaml)
           VERSION=$(echo "$VERSION_LINE" | sed -E 's/version: *([^ ]*)/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-    outputs:
-      release-version: ${{ steps.release-version.outputs.version }}
       - name: Build
         uses: oberhauser-dev/flutter-release-action@v0
         with:
           working-directory: netshare
           dry-run: false
           app-name: 'netshare'
-          app-version: ${{ needs.pre-run.outputs.release-version }}
+          app-version: ${{ steps.release-version.outputs.version }}
           tag: ${{ github.ref }}
           build-type: ${{ matrix.build-type }}
           token: ${{ github.token }}
