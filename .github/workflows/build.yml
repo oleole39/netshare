@@ -10,9 +10,6 @@ jobs:
   release-app:
     name: Release app as ${{ matrix.build-type }} (${{ matrix.platform }}) on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: netshare
     
     strategy:
       fail-fast: false
@@ -65,10 +62,8 @@ jobs:
       - name: Build
         uses: oberhauser-dev/flutter-release-action@v0
         with:
-          working-directory: netshare
           dry-run: false
-          app-name: 'netshare'
-          app-version: ${{ steps.release-version.outputs.version }}
-          tag: ${{ github.ref }}
+          app-version: v${{ steps.release-version.outputs.version }}
+          tag: ${{ steps.release-version.outputs.version }}
           build-type: ${{ matrix.build-type }}
           token: ${{ github.token }}
