@@ -11,8 +11,8 @@ jobs:
     name: Create draft release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
       - name: Find release version 
-        uses: actions/checkout@v6
         id: release-version
         run: |
           VERSION_LINE=$(grep '^version:' pubspec.yaml)
