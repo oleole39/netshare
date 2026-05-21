@@ -22,13 +22,25 @@ jobs:
           VERSION_WITH_BUILD_NUMBER=$(echo "$VERSION_LINE" | sed -E 's/version: *([^ ]*)/\1/')
           VERSION=${VERSION_WITH_BUILD_NUMBER%+*}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-      - name: Create release
-        uses: softprops/action-gh-release@v3
+      - name: Create the new tag
+        # Taken from https://stackoverflow.com/questions/60963759/use-github-actions-to-create-a-tag-but-not-a-release/64479344#64479344
+        uses: actions/github-script@v5
         with:
-          name: v${{ steps.release-version.outputs.version }}
-          tag_name: ${{ steps.release-version.outputs.version }}
-          body: Draft release #TODO - add release description here, cf. https://github.com/softprops/action-gh-release#inputs
-          draft: true
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ steps.release-version.outputs.version }}',
+              sha: context.sha
+            })
+      #- name: Create release
+      #  uses: softprops/action-gh-release@v3
+      #  with:
+      #    name: v${{ steps.release-version.outputs.version }}
+      #    tag_name: ${{ steps.release-version.outputs.version }}
+      #    body: Draft release #TODO - add release description here, cf. https://github.com/softprops/action-gh-release#inputs
+      #    draft: true
+
     outputs:
       release-version: ${{ steps.release-version.outputs.version }}
 
