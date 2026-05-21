@@ -1,4 +1,4 @@
-name: Flutter app build and release
+name: Build app for all platforms
 
 on:
   push:
