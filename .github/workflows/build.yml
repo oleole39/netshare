@@ -6,6 +6,9 @@ on:
       - '*' #on new tag
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   pre-run:
     name: Create draft release
