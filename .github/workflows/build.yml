@@ -24,7 +24,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Create the new tag
         # Taken from https://stackoverflow.com/questions/60963759/use-github-actions-to-create-a-tag-but-not-a-release/64479344#64479344
-        uses: actions/github-script@v5
+        uses: actions/github-script@v9
         with:
           script: |
             github.rest.git.createRef({
