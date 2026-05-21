@@ -57,7 +57,7 @@ jobs:
         run: |
           VERSION_LINE=$(grep '^version:' pubspec.yaml)
           VERSION_WITH_BUILD_NUMBER=$(echo "$VERSION_LINE" | sed -E 's/version: *([^ ]*)/\1/')
-          VERSION=${$VERSION_WITH_BUILD_NUMBER%+*}
+          VERSION=${VERSION_WITH_BUILD_NUMBER%+*}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Build
         uses: oberhauser-dev/flutter-release-action@v0
