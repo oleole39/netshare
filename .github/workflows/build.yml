@@ -27,7 +27,7 @@ jobs:
         with:
           name: v${{ steps.release-version.outputs.version }}
           tag_name: ${{ steps.release-version.outputs.version }}
-          body: #TODO - add release description here, cf. https://github.com/softprops/action-gh-release#inputs
+          body: Draft release #TODO - add release description here, cf. https://github.com/softprops/action-gh-release#inputs
           draft: true
     outputs:
       release-version: ${{ steps.release-version.outputs.version }}
@@ -50,10 +50,10 @@ jobs:
           - os: ubuntu-latest
             platform: linux
             build-type: debian
-          - os: macos-14
+          - os: macos-latest
             platform: macos
             build-type: macos
-          - os: macos-14
+          - os: macos-latest
             platform: ios
             build-type: ipa
     steps:
@@ -65,7 +65,6 @@ jobs:
       - uses: actions/setup-java@v4
         if: matrix.platform == 'android'
         with:
-          # AGP8 needs JDK 17
           distribution: 'temurin'
           java-version: '17'
       - name: Install Linux Dependencies
